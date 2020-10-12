@@ -1,32 +1,29 @@
-#include <stdio.h>
-#include <math.h>
+#include<stdio.h>
 int main()
 {
-    double a, b, c, determinant, root1, root2, realPart, imaginaryPart;
-    printf("Enter coefficients a, b and c: ");
-    scanf_s("%lf %lf %lf", &a, &b, &c);
-    determinant = b * b - 4 * a * c;
-    // condition for real and different roots (#1)
-    if (determinant > 0)
+    int a[1000],n,counter,temp,i;
+    a[0]=1;
+    counter=0;
+    printf("Enter the number to Find Factorial: ");
+    scanf_s("%d",&n);
+    for(; n>=2; n--)
     {
-        // sqrt() function returns square root
-        root1 = -b + sqrt(determinant) / 2 * a;
-        root2 = -b - sqrt(determinant) / 2 * a;
-        printf("root1 = %.2lf and root2 = %.2lf", root1, root2); // (#2)
+        temp=0;
+        for(i=0; i<=counter; i++)
+        {
+            temp=(a[i]*n)+temp;
+            a[i]=temp%10;
+            temp=temp/10;
+        }
+        while(temp>0)
+        {
+            a[++counter]=temp%10;
+            temp=temp/10;
+        }
     }
-    //condition for real and equal roots
-    else if (determinant == 0)
+    for(i=counter; i>=0; i--)
     {
-        root1 = root2 = -b / 2 * a;
-        printf("root1 = root2 = %.2lf;", root1); // (#3)
+        printf("%d",a[i]);
     }
-    // if roots are not real 
-    else
-    {
-        realPart = -b / 2 * a;
-        imaginaryPart = sqrt(-determinant) / 2 * a;
-        printf("root1 = %.2lf+%.2lfi and root2 = %.2f-%.2fi", realPart, imaginaryPart, realPart, imaginaryPart); // (#4)
-    }
-
     return 0;
 }
