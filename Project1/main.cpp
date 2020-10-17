@@ -1,29 +1,33 @@
-#include<stdio.h>
+#include <iostream>
+#include <math.h>
+using namespace std;
+struct num
+{
+    float x[11];
+    float y[11];
+};
+
 int main()
 {
-    int a[1000],n,counter,temp,i;
-    a[0]=1;
-    counter=0;
-    printf("Enter the number to Find Factorial: ");
-    scanf_s("%d",&n);
-    for(; n>=2; n--)
+    struct num num;
+    float m = 0, mt, a, b;
+    for (int i = 0; i < 10; i++)
     {
-        temp=0;
-        for(i=0; i<=counter; i++)
+        scanf_s("%f,%f", &num.x[i], &num.y[i]);
+    }
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = i + 1; j < 10; j++)
         {
-            temp=(a[i]*n)+temp;
-            a[i]=temp%10;
-            temp=temp/10;
-        }
-        while(temp>0)
-        {
-            a[++counter]=temp%10;
-            temp=temp/10;
+            mt = sqrt((num.x[i] - num.x[j]) * (num.x[i] - num.x[j]) + (num.y[i] - num.y[j]) * (num.y[i] - num.y[j]));
+            if (mt > m)
+            {
+                m = mt;
+                a = i;
+                b = j;
+            }
         }
     }
-    for(i=counter; i>=0; i--)
-    {
-        printf("%d",a[i]);
-    }
+    cout << a + 1 << " and " << b + 1 << " max distance is " << m;
     return 0;
 }
