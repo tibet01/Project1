@@ -16,7 +16,7 @@ void score(int, int);
 char cursor(int, int);
 
 int main() {
-	int x = 38, y = 20,new_star_x,new_star_y, position_x[5], position_y[5], shot[5] = {}, num = 0, star, star_x[20], star_y[20], star_1 = 0;
+	int x = 38, y = 20, new_star_x, new_star_y, position_x[5], position_y[5], shot[5] = {}, num = 0, star, star_x[20] = {}, star_y[20] = {}, star_1 = 0;
 	char ch = ' ';
 	setcursor(0);
 	srand(time(NULL)); 
@@ -24,11 +24,11 @@ int main() {
 
 	for (star = 0; star < 20; star++) 
 	{
-		while (check_star[star_x[star]][star_y[star]]==1)
+		do
 		{
-			star_x[star] = (rand() % 61) + 10;	 
+			star_x[star] = (rand() % 61) + 10;
 			star_y[star] = (rand() % 4) + 1;
-		} 
+		} while (check_star[star_x[star]][star_y[star]] == 1);
 		draw_star(star_x[star], star_y[star]);
 	}
 
@@ -100,8 +100,13 @@ int main() {
 						shot[i] = 0;								
 						erase_star(position_x[i], position_y[i]);
 						erase_shot(position_x[i], position_y[i]);
-						Beep(900, 300);  //ให้เกิดเสียง
-						draw_star(rand() % 65, rand() % 5);   // ให้ดาวเกิดสุ่มเรื่อยๆ หลังโดนยิงไป 1 อัน 
+						Beep(900, 300);  
+						do
+						{
+							new_star_x = (rand() % 61) + 10;
+							new_star_y = (rand() % 4) + 1;
+						} while (check_star[new_star_x][new_star_y] == 1);
+						draw_star(new_star_x, new_star_y);   
 						point+=1;  // เมื่อยิงโดน ให้เพิ่มค่าscore ทีละ 1 
 
 					}
