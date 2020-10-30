@@ -160,7 +160,7 @@ void draw_ship(int x, int y)
 {
 	setcursor(0);
 	gotoxy(x, y);
-	setcolor(2, 4);
+	setcolor(5, 0);
 	printf("<-0->");
 
 }
